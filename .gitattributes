@@ -1,0 +1,8 @@
+# Forceer LF in de repository (CI draait op Linux). Voorkomt CRLF/LF-ruis tussen
+# Windows-ontwikkelmachines en de CI-omgeving.
+* text=auto eol=lf
+
+# Binaire bestanden niet aanraken.
+*.png binary
+*.ico binary
+*.svg text eol=lf

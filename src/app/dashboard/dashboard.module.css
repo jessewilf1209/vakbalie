@@ -1,0 +1,1131 @@
+/*
+ * Dashboard-styling — "Premium natural".
+ * Cohesief met de widget: warme papiertinten, Fraunces (display) + Hanken
+ * Grotesk (body) via next/font, gelaagde schaduwen, gradient-accenten.
+ * Het dashboard is ons eigen product, dus één vaste merkkleur (geen
+ * tenant-kleur); tinten worden met color-mix afgeleid.
+ *
+ * Kwaliteitsvloer blijft staan: AA-contrast op de neutralen, zichtbare
+ * focus, responsive vanaf 360px, prefers-reduced-motion.
+ */
+
+.schil,
+.authScherm {
+  /* Merkkleur + afgeleide tinten */
+  --merk: #1f6f43;
+  --merk-diep: color-mix(in oklab, var(--merk) 74%, #000);
+  --merk-zacht: color-mix(in srgb, var(--merk) 8%, #fff);
+  --merk-rand: color-mix(in srgb, var(--merk) 24%, #fff);
+
+  /* Warme neutralen */
+  --inkt: #1b1d1b;
+  --inkt-zacht: #5d625d;
+  --papier: #f4f2ec;
+  --paneel: #ffffff;
+  --rand: rgba(27, 29, 27, 0.08);
+  --rand-sterk: rgba(27, 29, 27, 0.14);
+
+  --schaduw-zacht: 0 1px 2px rgba(27, 29, 27, 0.05), 0 4px 16px rgba(27, 29, 27, 0.04);
+  --schaduw-op: 0 2px 6px rgba(27, 29, 27, 0.06), 0 10px 30px rgba(27, 29, 27, 0.06);
+
+  --display: var(--font-display), Georgia, "Times New Roman", serif;
+  --body: var(--font-body), system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* ── Authenticatie (login, wachtwoord) ──────────────────── */
+
+.authScherm {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  font-family: var(--body);
+  color: var(--inkt);
+  background:
+    radial-gradient(
+      120% 70% at 50% -10%,
+      color-mix(in srgb, var(--merk) 9%, transparent),
+      transparent 60%
+    ),
+    var(--papier);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.authKaart {
+  width: 100%;
+  max-width: 400px;
+  background: var(--paneel);
+  border-radius: 18px;
+  padding: 2rem 1.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  box-shadow: var(--schaduw-op);
+}
+
+.authTitel {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: 0.1px;
+}
+
+.authSub {
+  margin: 0 0 1rem;
+  color: var(--inkt-zacht);
+  font-size: 0.92rem;
+}
+
+.authVoetnoot {
+  margin: 0.5rem 0 0;
+  font-size: 0.82rem;
+  color: var(--inkt-zacht);
+}
+
+.authVoetnoot a {
+  color: var(--merk);
+  font-weight: 600;
+  text-underline-offset: 2px;
+}
+
+.authVoetnoot a:hover {
+  text-decoration: underline;
+}
+
+/* ── Formuliervelden ────────────────────────────────────── */
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.6rem;
+  color: var(--inkt);
+}
+
+.veld {
+  min-height: 44px;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--rand-sterk);
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--inkt);
+  background: var(--paneel);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.veld:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--merk) 55%, #fff);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--merk) 15%, transparent);
+}
+
+.veld::placeholder {
+  color: color-mix(in srgb, var(--inkt) 40%, #fff);
+}
+
+/* ── Knoppen ─────────────────────────────────────────────── */
+
+.knopPrimair:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.knopPrimair {
+  min-height: 44px;
+  margin-top: 1rem;
+  border: 0;
+  border-radius: 11px;
+  padding: 0.65rem 1.1rem;
+  background: linear-gradient(135deg, color-mix(in oklab, var(--merk) 88%, #fff), var(--merk));
+  color: #fff;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--merk) 28%, transparent);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+
+.knopPrimair:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 13px color-mix(in srgb, var(--merk) 34%, transparent);
+}
+
+.knopPrimair:active {
+  transform: none;
+}
+
+.knopSecundair {
+  border: 1px solid var(--rand-sterk);
+  border-radius: 10px;
+  padding: 0.5rem 0.95rem;
+  background: var(--paneel);
+  color: var(--inkt);
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.88rem;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.knopSecundair:hover {
+  background: var(--papier);
+  border-color: var(--merk-rand);
+}
+
+/* ── Meldingen ──────────────────────────────────────────── */
+
+.foutmelding {
+  margin: 0.35rem 0;
+  padding: 0.6rem 0.85rem;
+  background: #fcf1f1;
+  color: #8a2222;
+  border: 1px solid #f0d6d6;
+  border-radius: 10px;
+  font-size: 0.85rem;
+}
+
+.melding {
+  margin: 0.35rem 0;
+  padding: 0.6rem 0.85rem;
+  background: var(--merk-zacht);
+  color: var(--merk-diep);
+  border: 1px solid var(--merk-rand);
+  border-radius: 10px;
+  font-size: 0.85rem;
+}
+
+/* ── App-schil ──────────────────────────────────────────── */
+
+.schil {
+  min-height: 100dvh;
+  background:
+    radial-gradient(
+      100% 40% at 50% 0%,
+      color-mix(in srgb, var(--merk) 5%, transparent),
+      transparent 70%
+    ),
+    var(--papier);
+  font-family: var(--body);
+  color: var(--inkt);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.balk {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.85rem 1.5rem;
+  background: color-mix(in srgb, var(--paneel) 82%, transparent);
+  backdrop-filter: saturate(1.4) blur(8px);
+  border-bottom: 1px solid var(--rand);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.balkTitel {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Duwt de uitlog-knop naar rechts; merknaam + nav blijven links gegroepeerd. */
+.balkUitloggen {
+  margin-left: auto;
+}
+
+.inhoud {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.75rem 1.25rem 4rem;
+}
+
+.balkNav {
+  display: flex;
+  gap: 0.35rem;
+}
+
+/* Smal scherm: merknaam + uitloggen op regel 1, nav op een eigen regel
+   eronder over de volle breedte (anders wordt de merknaam weggedrukt). */
+@media (max-width: 600px) {
+  .balk {
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    padding: 0.7rem 1rem;
+  }
+
+  .balkNav {
+    order: 3;
+    flex-basis: 100%;
+    margin: 0 -0.7rem;
+  }
+}
+
+.balkNavLink {
+  color: var(--inkt-zacht);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.35rem 0.7rem;
+  border-radius: 8px;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.balkNavLink:hover {
+  color: var(--merk-diep);
+  background: var(--merk-zacht);
+}
+
+.balkNavActief {
+  color: var(--merk-diep);
+  background: var(--merk-zacht);
+  font-weight: 600;
+}
+
+.paginaTitel {
+  margin: 0.5rem 0 0.5rem;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.65rem;
+  letter-spacing: 0.1px;
+}
+
+/* ── Kerncijfers (home) ─────────────────────────────────── */
+
+.kpiRij {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 2rem;
+}
+
+.kpiKaart {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    var(--paneel),
+    color-mix(in srgb, var(--merk) 3%, var(--paneel))
+  );
+  border: 1px solid var(--rand);
+  border-radius: 14px;
+  padding: 1.15rem 1.25rem;
+  overflow: hidden;
+}
+
+.kpiKaart::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--merk), color-mix(in srgb, var(--merk) 50%, #fff));
+}
+
+.kpiGetal {
+  font-family: var(--display);
+  font-size: 2.1rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.kpiLabel {
+  margin-top: 0.2rem;
+  color: var(--inkt-zacht);
+  font-size: 0.85rem;
+}
+
+.sectieKopRij {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* ── Leadtabel ──────────────────────────────────────────── */
+
+.tabelWrap {
+  overflow-x: auto;
+  background: var(--paneel);
+  border: 1px solid var(--rand);
+  border-radius: 14px;
+}
+
+.tabel {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.tabel th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--rand);
+  background: color-mix(in srgb, var(--merk) 3%, var(--paneel));
+  color: var(--inkt-zacht);
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.tabel td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--rand);
+  vertical-align: middle;
+}
+
+.tabel tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.tabel tbody tr {
+  transition: background 0.12s ease;
+}
+
+.tabel tbody tr:hover {
+  background: color-mix(in srgb, var(--merk) 4%, var(--paneel));
+}
+
+.rijLink {
+  color: var(--merk-diep);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.rijLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── Leadscore-badge ────────────────────────────────────── */
+
+.badge {
+  display: inline-block;
+  min-width: 2.4rem;
+  text-align: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border: 1px solid transparent;
+}
+
+.badgeHoog {
+  background: color-mix(in srgb, var(--merk) 12%, #fff);
+  color: var(--merk-diep);
+  border-color: var(--merk-rand);
+}
+
+.badgeMiddel {
+  background: #fdf3e0;
+  color: #8a6014;
+  border-color: #f0dcb4;
+}
+
+.badgeLaag {
+  background: #f0f1f0;
+  color: #555;
+  border-color: var(--rand-sterk);
+}
+
+.badgeLeeg {
+  color: #999;
+}
+
+/* ── Statusfilter ───────────────────────────────────────── */
+
+.filterRij {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.filterKnop {
+  border: 1px solid var(--rand-sterk);
+  border-radius: 999px;
+  padding: 0.32rem 0.9rem;
+  background: var(--paneel);
+  color: var(--inkt-zacht);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    background 0.15s ease;
+}
+
+.filterKnop:hover {
+  border-color: var(--merk-rand);
+  color: var(--merk-diep);
+  background: var(--merk-zacht);
+}
+
+.filterActief {
+  background: var(--merk);
+  border-color: var(--merk);
+  color: #fff;
+}
+
+.filterActief:hover {
+  background: var(--merk);
+  color: #fff;
+}
+
+/* ── Paginering & links ─────────────────────────────────── */
+
+.paginering {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--inkt-zacht);
+}
+
+.link {
+  color: var(--merk-diep);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.linkUit {
+  color: color-mix(in srgb, var(--inkt) 35%, #fff);
+  font-size: 0.9rem;
+}
+
+.leegStaat {
+  background: var(--paneel);
+  border: 1px dashed var(--rand-sterk);
+  border-radius: 14px;
+  padding: 2rem 1.5rem;
+  color: var(--inkt-zacht);
+  text-align: center;
+}
+
+/* ── Leaddetail ─────────────────────────────────────────── */
+
+.detailKopRij {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.sectie {
+  background: var(--paneel);
+  border: 1px solid var(--rand);
+  border-radius: 14px;
+  padding: 1.25rem 1.4rem;
+  margin-top: 1.1rem;
+}
+
+.sectieTitel {
+  margin: 0 0 0.7rem;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.gegevens {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  font-size: 0.92rem;
+}
+
+.gegevensRij {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--rand);
+}
+
+.gegevensRij:last-child {
+  border-bottom: 0;
+}
+
+.gegevensRij dt {
+  color: var(--inkt-zacht);
+  font-weight: 500;
+}
+
+.gegevensRij dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 540px) {
+  .gegevensRij {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+}
+
+.redenen {
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.redenen li::marker {
+  color: var(--merk);
+}
+
+.fotoRij {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.foto {
+  width: 160px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--rand-sterk);
+  display: block;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.foto:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--schaduw-op);
+}
+
+/* ── Gesprek (leaddetail) ───────────────────────────────── */
+
+.gesprek {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 440px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rand-sterk) transparent;
+}
+
+.gesprek::-webkit-scrollbar {
+  width: 8px;
+}
+
+.gesprek::-webkit-scrollbar-thumb {
+  background: var(--rand-sterk);
+  border-radius: 99px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.bericht {
+  margin: 0;
+  max-width: 78%;
+  padding: 0.55rem 0.8rem;
+  border-radius: 14px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.berichtBezoeker {
+  align-self: flex-end;
+  color: #fff;
+  background: linear-gradient(135deg, color-mix(in oklab, var(--merk) 90%, #fff), var(--merk));
+  border-bottom-right-radius: 5px;
+}
+
+.berichtAssistent {
+  align-self: flex-start;
+  color: var(--inkt);
+  background: var(--papier);
+  border: 1px solid var(--rand);
+  border-bottom-left-radius: 5px;
+}
+
+.statusFormulier {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ── Verwijderen (AVG) ──────────────────────────────────── */
+
+.knopGevaar {
+  border: 0;
+  border-radius: 11px;
+  padding: 0.65rem 1.1rem;
+  background: linear-gradient(135deg, #b73030, #9c2222);
+  color: #fff;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(156, 34, 34, 0.28);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+
+.knopGevaar:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 13px rgba(156, 34, 34, 0.34);
+}
+
+.knopGevaar:active {
+  transform: none;
+}
+
+.linkGevaar {
+  color: #9c2222;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.linkGevaar:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.verwijderRij {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.verwijderRij .knopSecundair {
+  text-decoration: none;
+}
+
+/* ── Instellingen ───────────────────────────────────────── */
+
+.instellingenFormulier {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-width: 480px;
+}
+
+.instellingenFormulier .knopPrimair {
+  margin-top: 0.75rem;
+}
+
+.kleurVeld {
+  width: 64px;
+  height: 38px;
+  padding: 3px;
+  border: 1px solid var(--rand-sterk);
+  border-radius: 10px;
+  background: var(--paneel);
+  cursor: pointer;
+}
+
+.veldUitleg {
+  margin: 0.2rem 0 0.4rem;
+  font-size: 0.82rem;
+  color: var(--inkt-zacht);
+}
+
+.snippet {
+  background: var(--papier);
+  border: 1px solid var(--rand);
+  border-radius: 10px;
+  padding: 0.8rem 0.95rem;
+  font-size: 0.82rem;
+  font-family: ui-monospace, "SFMono-Regular", "Cascadia Code", Menlo, Consolas, monospace;
+  overflow-x: auto;
+  margin: 0.5rem 0 0.75rem;
+  color: var(--inkt);
+}
+
+.statusFormulier .label {
+  margin-top: 0;
+}
+
+.statusFormulier .veld {
+  padding: 0.45rem 0.65rem;
+}
+
+/* ── Kwaliteitsvloer ────────────────────────────────────── */
+
+.schil :is(button, input, textarea, select, a):focus-visible,
+.authScherm :is(button, input, textarea, select, a):focus-visible {
+  outline: 2px solid var(--merk);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .schil *,
+  .authScherm * {
+    transition: none !important;
+  }
+}
+
+/* ── Zoekbalk (leads) ───────────────────────────────────── */
+
+.zoekRij {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.zoekVeld {
+  max-width: 280px;
+}
+
+/* ── Auth-branding ──────────────────────────────────────── */
+
+.authBrand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.authBrandMark {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 8px;
+  background: linear-gradient(135deg, color-mix(in oklab, var(--merk) 88%, #fff), var(--merk));
+  color: #fff;
+}
+
+.authBrandNaam {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--inkt);
+}
+
+/* ── Wachtwoordveld (show/hide) ─────────────────────────── */
+
+.wachtwoordWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.wachtwoordWrap .veld {
+  flex: 1;
+  padding-right: 4.5rem;
+}
+
+/* Minimaal 44x44 px tikvlak (WCAG 2.5.8 eist 24, 44 is de richtlijn voor
+   duimen). Het veld houdt via padding-right ruimte vrij voor de knop. */
+.oogKnop {
+  position: absolute;
+  right: 0.15rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  background: none;
+  border: none;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--inkt-zacht);
+  cursor: pointer;
+  padding: 0 0.6rem;
+  border-radius: 6px;
+}
+
+.oogKnop:hover {
+  color: var(--merk-diep);
+}
+
+/* ── Verwijderknop als link ─────────────────────────────── */
+
+a.knopGevaar {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* ── Kleurpicker (instellingen) ─────────────────────────── */
+
+.kleurVeldWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.kleurPreview {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.kleurWaarschuwing {
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  background: #fef9e7;
+  color: #7d6200;
+  border: 1px solid #f0dc8a;
+  border-radius: 8px;
+  font-size: 0.82rem;
+}
+
+/* ── KPI-hints ──────────────────────────────────────────── */
+
+.kpiHint {
+  font-weight: 400;
+  color: var(--inkt-zacht);
+  font-size: 0.8em;
+}
+
+.kpiPeriode {
+  font-size: 0.85rem;
+  color: var(--inkt-zacht);
+}
+
+/* ── Sorteerbare tabelkoppen ────────────────────────────── */
+
+.sorteerkop {
+  color: inherit;
+  text-decoration: none;
+  font-weight: inherit;
+}
+
+.sorteerkop:hover {
+  color: var(--merk-diep);
+}
+
+/* ── Navbar-badge (nieuw leads) ─────────────────────────── */
+
+.navBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.2rem;
+  height: 1.2rem;
+  padding: 0 0.25rem;
+  border-radius: 999px;
+  background: var(--merk);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  margin-left: 0.25rem;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+/* ── KPI-maandvergelijking ──────────────────────────────── */
+
+.kpiDelta {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--inkt-zacht);
+  margin-top: 0.2rem;
+}
+
+.kpiDeltaPositief {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--merk-diep);
+  font-weight: 600;
+  margin-top: 0.2rem;
+}
+
+.kpiDeltaNegatief {
+  display: block;
+  font-size: 0.75rem;
+  color: #9c2222;
+  margin-top: 0.2rem;
+}
+
+/* ── Opvolgen: AI-conceptmail en belscript ──────── */
+
+.opvolg {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.15rem;
+  max-width: 640px;
+}
+
+/* Labels zijn <label>-elementen (inline by default) en moeten hier op een
+   eigen regel staan, net als in het instellingenformulier. */
+.opvolg .label {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 0.3rem;
+}
+
+.opvolg .veld {
+  width: 100%;
+  display: block;
+}
+
+.opvolg textarea.veld {
+  resize: vertical;
+  min-height: 3.4rem;
+  line-height: 1.5;
+}
+
+.opvolgUitleg {
+  margin: 0 0 0.9rem;
+  font-size: 0.85rem;
+  color: var(--inkt-zacht);
+}
+
+/* Tekstteller: rechts uitgelijnd onder het veld, zodat de linkerrand van
+   alle velden en labels één doorlopende lijn blijft. */
+.opvolgTeller {
+  margin: 0.3rem 0 0;
+  font-size: 0.75rem;
+  color: var(--inkt-zacht);
+  text-align: right;
+}
+
+.opvolgKnoppen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  margin-top: 0.9rem;
+}
+
+/* De knoppen hebben eigen marges uit de generieke stijl; in deze rij regelt
+   de flex-gap de ruimte. */
+.opvolgKnoppen .knopPrimair,
+.opvolgKnoppen .knopSecundair {
+  margin-top: 0;
+}
+
+/* Het concept staat visueel los van de invoer: dit is wat er straks
+   daadwerkelijk verstuurd wordt. */
+.opvolgConcept {
+  margin-top: 1.1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--merk-rand);
+  border-radius: 12px;
+  background: var(--merk-zacht);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.opvolgConceptKop {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  color: var(--merk-diep);
+  font-weight: 600;
+}
+
+.opvolgConcept .veld {
+  background: var(--paneel);
+}
+
+.opvolgScript {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.opvolgScriptBlok {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.opvolgScriptLabel {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--merk-diep);
+}
+
+.opvolgScriptTekst {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+/* Verstuurde berichten: historie onder de opvolgsectie. */
+.opvolgHistorie {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.opvolgHistorieItem {
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--rand);
+}
+
+.opvolgHistorieItem:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.opvolgHistorieKop {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.opvolgHistorieDatum {
+  margin: 0.15rem 0 0.5rem;
+  font-size: 0.78rem;
+  color: var(--inkt-zacht);
+}
+
+.opvolgHistorieTekst {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--inkt-zacht);
+}

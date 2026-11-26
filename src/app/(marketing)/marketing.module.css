@@ -1,0 +1,543 @@
+/*
+ * Marketing-/etalagesite, richting "Vakblad".
+ *
+ * Een rustig, goed gezet vakblad: grote lichte Fraunces-koppen, haarlijnen in
+ * plaats van kaarten, lijsten in plaats van rasters, het product groot in beeld.
+ * Geen gradients, geen schaduwen, geen pills, geen iconen in vakjes.
+ *
+ * Alle tokens leven op .site en erven door naar de losse page-/componentmodules
+ * (custom properties erven). De marketinglaag blijft zo volledig gescheiden van
+ * widget.module.css en dashboard.module.css.
+ *
+ * Kwaliteitsvloer: AA-contrast, zichtbare focus,
+ * responsive vanaf 360px, prefers-reduced-motion gerespecteerd.
+ */
+
+.site {
+  /* Kleur. Contrast op papier staat achter elk token. */
+  --paper: #faf6ee;
+  --paper-deep: #f1e9da;
+  --panel: #fffdf8; /* alleen achter productbeeld */
+  --ink: #1a201b; /* 15.4:1 */
+  --ink-soft: #535d54; /* 6.4:1, 5.7:1 op papier diep */
+  --green: #1f6f43; /* 5.7:1; wit erop 6.2:1 */
+  --green-deep: #134029; /* papier erop 10.9:1 */
+  --clay-deep: #9a4d1f; /* 5.6:1, accenttekst */
+  --clay: #c1672f; /* 3.7:1, alleen grote cijfers en lijnen */
+  --clay-soft: #f6e7da; /* ondergrond voorlopige-versie-melding */
+  --line: rgba(26, 32, 27, 0.14);
+  --rule: var(--ink); /* zware lijn boven tabellen en lijsten */
+
+  /* Tekst op diep groen (footer, security-sectie). */
+  --on-dark: var(--paper);
+  --on-dark-soft: rgba(250, 246, 238, 0.78); /* 7.3:1 */
+  --on-dark-line: rgba(250, 246, 238, 0.18);
+
+  /* Raster: 1200px, 12 kolommen, gutter 24px. */
+  --maxw: 1200px;
+  --gutter: 24px;
+  --pad-x: clamp(1.25rem, 4vw, 2.5rem);
+  --section-y: clamp(3.5rem, 8vw, 6.5rem);
+  --radius: 4px;
+
+  --display: var(--font-display), Georgia, "Times New Roman", serif;
+  --body: var(--font-body), system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.site a {
+  color: inherit;
+}
+
+/* ── Toegankelijkheidslink ──────────────────────────────── */
+
+.skipLink {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--green-deep);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 0 0 var(--radius) var(--radius);
+  text-decoration: none;
+}
+
+.skipLink:focus {
+  top: 0;
+}
+
+.main {
+  flex: 1;
+}
+
+/* ── Layout-primitieven ─────────────────────────────────── */
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-inline: var(--pad-x);
+}
+
+/* 12-koloms raster; de inhoud loopt links uitgelijnd over de volle breedte. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+
+.content {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+.section {
+  padding-block: var(--section-y);
+}
+
+/* Haarlijn over de volle breedte tussen twee secties. */
+.ruleTop {
+  border-top: 1px solid var(--line);
+}
+
+.pageHead {
+  padding-block: clamp(3rem, 7vw, 5.5rem) clamp(2.5rem, 5vw, 4rem);
+}
+
+/* ── Typografie ──────────────────────────────────── */
+
+.h1 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 1rem + 4vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0;
+  max-width: 24ch;
+  text-wrap: balance;
+}
+
+.h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin: 0;
+  max-width: 22ch;
+  text-wrap: balance;
+}
+
+.lede {
+  margin: 1.25rem 0 0;
+  max-width: 56ch;
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  color: var(--ink-soft);
+}
+
+/* ── Knoppen ────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  padding: 0.75rem 1.2rem;
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.site .btnPrimary {
+  color: #fff;
+  background: var(--green);
+}
+
+.site .btnPrimary:hover {
+  background: var(--green-deep);
+}
+
+.site .btnSecondary {
+  color: var(--ink);
+  background: transparent;
+  border-color: var(--ink-soft);
+}
+
+.site .btnSecondary:hover {
+  border-color: var(--ink);
+  background: rgba(26, 32, 27, 0.05);
+}
+
+/* Tekstlink met pijl ("Alle features in detail →"). */
+.site .btnGhost {
+  min-height: 0;
+  padding: 0.35rem 0;
+  color: var(--green);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+
+.site .btnGhost:hover {
+  color: var(--green-deep);
+  text-decoration-thickness: 2px;
+}
+
+.btnLarge {
+  padding: 0.85rem 1.35rem;
+}
+
+.btnArrow {
+  transition: transform 0.18s ease;
+}
+
+.btn:hover .btnArrow {
+  transform: translateX(3px);
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  height: 4.5rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.brandMark {
+  display: inline-flex;
+  color: var(--green);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  margin-left: auto;
+}
+
+.site .navLink {
+  padding-block: 0.3rem;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.site .navLink:hover {
+  color: var(--ink);
+  border-bottom-color: var(--line);
+}
+
+.site .navLinkActive {
+  color: var(--ink);
+  border-bottom-color: var(--green);
+}
+
+.navCta {
+  margin-left: 0.25rem;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin-left: auto;
+  border: none;
+  border-radius: var(--radius);
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.hamburger:hover {
+  background: var(--paper-deep);
+}
+
+.hamburgerBar {
+  display: block;
+  width: 1.25rem;
+  height: 2px;
+  background: currentColor;
+}
+
+.mobileMenu {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--pad-x) 1rem;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+}
+
+.site .mobileNavLink {
+  display: block;
+  padding: 0.85rem 0;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+}
+
+.site .mobileNavLink:hover {
+  color: var(--ink);
+}
+
+.site .mobileNavLink.navLinkActive {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-underline-offset: 0.3em;
+}
+
+@media (max-width: 860px) {
+  .nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* ── CTA-band (slot van Home, Features, Zo werkt het, Prijzen) ── */
+
+.band {
+  background: var(--paper-deep);
+  padding-block: clamp(3.5rem, 7vw, 5.5rem);
+}
+
+.bandGrid {
+  align-items: center;
+  row-gap: 2rem;
+}
+
+.bandBody {
+  grid-column: 1 / span 7;
+}
+
+.bandTitle {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.25rem, 1rem + 3.6vw, 3.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 0;
+  max-width: 18ch;
+  text-wrap: balance;
+}
+
+.bandText {
+  margin: 1rem 0 0;
+  max-width: 52ch;
+  font-size: 1.0625rem;
+  color: var(--ink-soft);
+}
+
+.bandActions {
+  grid-column: 9 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+/* ── Footer ─────────────────────────────────────────────── */
+
+.footer {
+  background: var(--green-deep);
+  color: var(--on-dark-soft);
+  padding-block: clamp(3rem, 6vw, 4.5rem) 2rem;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 5fr 3fr 3fr;
+  gap: 2.5rem var(--gutter);
+}
+
+.site .footerBrand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: var(--on-dark);
+  text-decoration: none;
+}
+
+/* Bladnerf donker op het lichte blad. */
+.footerBrand svg path:last-child {
+  stroke: var(--green-deep);
+}
+
+.footerTag {
+  margin: 1rem 0 0;
+  max-width: 36ch;
+  font-size: 15px;
+}
+
+.footerColTitle {
+  margin: 0 0 1rem;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--on-dark);
+}
+
+.footerCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.site .footerCol a {
+  font-size: 15px;
+  color: var(--on-dark-soft);
+  text-decoration: none;
+}
+
+.site .footerCol a:hover {
+  color: var(--on-dark);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.footerBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--on-dark-line);
+  font-size: 14px;
+}
+
+/* ── Reveal-animatie (page-load, alleen de hero) ────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: revealIn 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+@keyframes revealIn {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── Responsive: onder 820px één kolom, sectienaam bovenaan ── */
+
+@media (max-width: 820px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Hogere specificiteit dan de kolomplaatsing in de page-modules. */
+  .site .grid > * {
+    grid-column: 1 / -1;
+  }
+
+  .bandActions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footerBrandCol {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 460px) {
+  .footerGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Kwaliteitsvloer ────────────────────────────────────── */
+
+.site :is(a, button, summary, input, textarea, select, iframe):focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Op diep groen is de groene focusring te zwak: papierkleur. */
+.site .footer :focus-visible,
+.site .onDark :focus-visible {
+  outline-color: var(--on-dark);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site *,
+  .site *::before,
+  .site *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

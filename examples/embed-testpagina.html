@@ -1,0 +1,58 @@
+<!doctype html>
+<!--
+  Externe testpagina voor de widget.
+  Staat bewust in examples/ (niet in public/) zodat hij nooit mee-deployt.
+
+  Gebruik:
+    1. Start de app:        pnpm dev          (http://localhost:3000)
+    2. Serveer deze map:    pnpm dlx serve examples -l 8080
+    3. Open:                http://localhost:8080/embed-testpagina.html
+
+  De pagina draait dan op een ANDERE origin (8080) dan de app (3000) en
+  bewijst zo cross-origin embedding + de frame-ancestors-CSP.
+-->
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hoveniersbedrijf De Groene Tuin — testpagina</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 0;
+        background: #f7f5f0;
+        color: #2a2a2a;
+      }
+      header {
+        background: #1f6f43;
+        color: #fff;
+        padding: 2rem;
+      }
+      main {
+        max-width: 720px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Hoveniersbedrijf De Groene Tuin</h1>
+      <p>Fictieve klantsite om de widget-embed te testen.</p>
+    </header>
+    <main>
+      <h2>Uw droomtuin begint hier</h2>
+      <p>
+        Dit is een normale bedrijfswebsite. Rechtsonder hoort de chatknop van de offerte-assistent
+        te verschijnen — geladen via één script-tag.
+      </p>
+    </main>
+
+    <!-- Dé ene regel die een klant op zijn site plakt: -->
+    <script
+      src="http://localhost:3000/widget.js"
+      data-tenant-key="wk_test_1234567890abcdef"
+      async
+    ></script>
+  </body>
+</html>

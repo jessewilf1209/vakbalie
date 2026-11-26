@@ -1,0 +1,32 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    groups:
+      dev-dependencies:
+        dependency-type: development
+      production-dependencies:
+        dependency-type: production
+    # Majors van de toolchain handmatig en per stuk, niet via een groeps-PR:
+    # - eslint 10 breekt eslint-plugin-react via eslint-config-next (blijft op 9)
+    # - typescript 7 wordt nog niet ondersteund door typescript-eslint
+    # - vitest 5 is een major met eigen migratiewerk
+    # Minor- en patch-updates komen gewoon door.
+    ignore:
+      - dependency-name: eslint
+        update-types: ["version-update:semver-major"]
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
+      - dependency-name: vitest
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5

@@ -1,0 +1,114 @@
+/* Live demo: tips links, het ingebedde widget-venster rechts in een vierkant frame. */
+
+.wrap {
+  padding-block: clamp(3rem, 7vw, 5.5rem) var(--section-y);
+}
+
+.head {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.layout {
+  align-items: start;
+  row-gap: 2.5rem;
+}
+
+.aside {
+  grid-column: 1 / span 4;
+  position: sticky;
+  top: 6rem;
+}
+
+.tag {
+  margin: 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.tips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tip {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 0.75rem;
+  padding-block: 1.1rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 16px;
+}
+
+.tipNum {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.05;
+  color: var(--green);
+}
+
+.note {
+  margin: 1.25rem 0 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+/* Het ingebedde widget-venster: vierkant frame met haarlijn, geen schaduw. */
+.stage {
+  grid-column: 5 / -1;
+  padding: 0.5rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+
+.frame {
+  display: block;
+  width: 100%;
+  height: 680px;
+  border: 0;
+  background: var(--panel);
+}
+
+/* Fallback wanneer de demo-tenant nog niet is geconfigureerd. */
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  height: 680px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.placeholderTitle {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+
+.placeholderText {
+  margin: 0;
+  max-width: 38ch;
+  color: var(--ink-soft);
+}
+
+.placeholderCta {
+  margin-top: 0.6rem;
+}
+
+@media (max-width: 820px) {
+  .aside {
+    position: static;
+  }
+
+  .frame,
+  .placeholder {
+    height: 600px;
+  }
+}

@@ -1,0 +1,8 @@
+# Gitleaks-configuratie: standaardregels + projectspecifieke allowlist.
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Publieke widget-keys (wk_...) zijn bewust publiek — per ontwerp geen secret. Echte secrets (Supabase service-role, Anthropic, Resend) vallen NIET onder dit patroon en worden gewoon gedetecteerd."
+regexes = ['''wk_[A-Za-z0-9_-]{16,64}''']

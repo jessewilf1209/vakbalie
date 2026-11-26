@@ -1,0 +1,62 @@
+<!doctype html>
+<!--
+  Externe testpagina voor de INLINE-embed.
+  Staat bewust in examples/ (niet in public/) zodat hij nooit mee-deployt.
+
+  Gebruik:
+    1. Start de app:        pnpm dev          (http://localhost:3000)
+    2. Serveer deze map:    pnpm dlx serve examples -l 8080
+    3. Open:                http://localhost:8080/embed-inline-testpagina.html
+
+  De pagina draait op een ANDERE origin (8080) dan de app (3000) en bewijst
+  cross-origin embedding + de frame-ancestors-CSP. Schakel JavaScript uit om
+  de statische fallback te zien (die hoort zichtbaar te blijven).
+-->
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hoveniersbedrijf De Groene Tuin — offerte aanvragen</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 0;
+        background: #f7f5f0;
+        color: #2a2a2a;
+      }
+      header {
+        background: #1f6f43;
+        color: #fff;
+        padding: 2rem;
+      }
+      main {
+        max-width: 760px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Hoveniersbedrijf De Groene Tuin</h1>
+      <p>Fictieve klantsite — dit is de "offerte aanvragen"-pagina.</p>
+    </header>
+    <main>
+      <h2>Vraag vrijblijvend een offerte aan</h2>
+      <p>
+        Hieronder stond vroeger een statisch formulier. Nu staat hier de AI-assistent inline — op
+        dezelfde URL, zonder de pagina of advertentielinks te breken.
+      </p>
+
+      <!-- Het blok dat in de plaats van het oude formulier komt: -->
+      <div data-offerte-agent-embed data-tenant-key="wk_test_1234567890abcdef">
+        <!-- Statische fallback: werkt zonder JavaScript. -->
+        <p>
+          Liever direct contact? Mail ons op
+          <a href="mailto:info@groenco.test">info@groenco.test</a>.
+        </p>
+      </div>
+      <script src="http://localhost:3000/embed.js" async></script>
+    </main>
+  </body>
+</html>

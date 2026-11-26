@@ -1,0 +1,45 @@
+{
+  "name": "offerte-agent",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "rooktest:llm": "vitest run --config vitest.rooktest.config.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/bedrock-sdk": "^1.1.2",
+    "@anthropic-ai/sdk": "^1.11.0",
+    "@aws-sdk/client-sesv2": "^3.1173.0",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.119.2",
+    "@vercel/oidc-aws-credentials-provider": "^3.3.21",
+    "jose": "^6.2.18",
+    "libphonenumber-js": "^1.13.17",
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "server-only": "^0.0.1",
+    "sharp": "^0.35.5",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "16.4.6",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.10.1",
+    "supabase": "^2.106.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8"
+  }
+}

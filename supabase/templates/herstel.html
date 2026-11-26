@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="nl">
+  <body
+    style="
+      margin: 0;
+      padding: 24px;
+      background: #f8f4ec;
+      font-family:
+        system-ui,
+        -apple-system,
+        Segoe UI,
+        sans-serif;
+      color: #1d2a22;
+    "
+  >
+    <div
+      style="
+        max-width: 520px;
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 28px;
+      "
+    >
+      <p style="margin: 0 0 16px; font-size: 18px; font-weight: 600">Nieuw wachtwoord instellen</p>
+      <p style="margin: 0 0 24px; line-height: 1.5">
+        Je hebt gevraagd om een nieuw wachtwoord voor je Vakbalie-account. Klik op de knop om er een
+        in te stellen. Dat kan ook op een ander apparaat dan waar je de aanvraag deed.
+      </p>
+      <p style="margin: 0 0 24px">
+        <a
+          href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=recovery&next=/dashboard/wachtwoord-instellen"
+          style="
+            display: inline-block;
+            padding: 12px 20px;
+            background: #1f6f43;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+          "
+        >
+          Wachtwoord instellen
+        </a>
+      </p>
+      <p style="margin: 0; font-size: 13px; color: #5b6b61; line-height: 1.5">
+        De link werkt één keer en verloopt na een uur. Heb je dit niet zelf aangevraagd? Dan hoef je
+        niets te doen; je wachtwoord blijft hetzelfde.
+      </p>
+    </div>
+  </body>
+</html>

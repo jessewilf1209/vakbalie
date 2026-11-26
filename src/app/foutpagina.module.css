@@ -1,0 +1,30 @@
+/* Gedeelde opmaak voor de 404- en foutpagina. */
+
+.wrap {
+  padding-block: clamp(3rem, 8vw, 6rem) var(--section-y, 5rem);
+}
+
+.inhoud {
+  grid-column: 1 / -1;
+  max-width: 40rem;
+}
+
+.lead {
+  margin: 1.25rem 0 0;
+  max-width: 46ch;
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  color: var(--ink-soft);
+}
+
+.acties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.code {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+}

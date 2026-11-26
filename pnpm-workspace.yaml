@@ -1,0 +1,15 @@
+# Bewust toegestane native build-scripts (pnpm blokkeert deze standaard ter
+# bescherming tegen supply-chain-aanvallen). Alleen vertrouwde pakketten:
+#   - sharp:         officiële image-optimalisatie voor next/image
+#   - unrs-resolver: native resolver gebruikt door eslint-config-next
+#   - supabase:      postinstall haalt de juiste CLI-binary voor dit platform op
+allowBuilds:
+  sharp: true
+  unrs-resolver: true
+  supabase: true
+
+# @vercel/cli-config pint zod exact op 4.1.11 (advisory: geheugenuitputting
+# bij grote collecties, gepatcht in 4.6.6). Binnen zod 4 compatibel. Weghalen
+# zodra @vercel/cli-config zelf een gepatchte versie gebruikt.
+overrides:
+  "@vercel/cli-config>zod": ^4.6.7

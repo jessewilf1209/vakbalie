@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="nl">
+  <body
+    style="
+      margin: 0;
+      padding: 24px;
+      background: #f8f4ec;
+      font-family:
+        system-ui,
+        -apple-system,
+        Segoe UI,
+        sans-serif;
+      color: #1d2a22;
+    "
+  >
+    <div
+      style="
+        max-width: 520px;
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 28px;
+      "
+    >
+      <p style="margin: 0 0 16px; font-size: 18px; font-weight: 600">
+        Je bent uitgenodigd voor Vakbalie
+      </p>
+      <p style="margin: 0 0 16px; line-height: 1.5">
+        Er is een account voor je klaargezet in het dashboard van Vakbalie. Hier zie je de
+        offerteaanvragen die via de chat op je website binnenkomen.
+      </p>
+      <p style="margin: 0 0 24px; line-height: 1.5">
+        Klik op de knop om je wachtwoord in te stellen.
+      </p>
+      <p style="margin: 0 0 24px">
+        <a
+          href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=invite&next=/dashboard/wachtwoord-instellen"
+          style="
+            display: inline-block;
+            padding: 12px 20px;
+            background: #1f6f43;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+          "
+        >
+          Wachtwoord instellen
+        </a>
+      </p>
+      <p style="margin: 0; font-size: 13px; color: #5b6b61; line-height: 1.5">
+        De link werkt één keer en verloopt na een uur. Verwachtte je deze mail niet? Dan kun je hem
+        negeren.
+      </p>
+    </div>
+  </body>
+</html>
